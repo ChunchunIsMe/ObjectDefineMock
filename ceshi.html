@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const obj = {};
+    function test() { };
+    let key = [];
+    Object.defineProperty(obj, 'key', {
+      get() {
+        console.log('get');
+        return key[this.id];
+      },
+      set(val) {
+        console.log('set');
+        key[this.id] = this.id;
+      },
+    });
+    test.prototype = obj;
+    const a = new test();
+    const b = new test();
+    a.id = 1;
+    b.id = 2;
+    a.key = 1;
+    console.log(a, b);
+  </script>
+</body>
+
+</html>
